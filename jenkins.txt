@@ -25,7 +25,7 @@ pipeline
             steps
             {
                 //powershell 'dotnet build C:/ProgramData/jenkins/.jenkins/workspace/Dotnetapp/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj'
-                bat "dotnet build C:/ProgramData/jenkins/.jenkins/workspace/PipelineManual/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj --configuration Release"
+                bat "dotnet build C:/ProgramData/jenkins/.jenkins/workspace/pipeline-git/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj --configuration Release"
                 //C:\ProgramData\Jenkins\.jenkins\workspace\Dotnetapp\aspnet-core-dotnet-core
             }
         }
@@ -33,7 +33,7 @@ pipeline
         {
             steps
             {
-                bat "dotnet publish C:/ProgramData/jenkins/.jenkins/workspace/PipelineManual/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj"
+                bat "dotnet publish C:/ProgramData/jenkins/.jenkins/workspace/pipeline-git/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj"
             }
         }
         stage('Package') 
@@ -44,7 +44,7 @@ pipeline
                 bat "del *.zip"
         
                 bat "tar.exe -a -c -f sampleapp1.zip aspnet-core-dotnet-core/bin/Debug/netcoreapp1.1/publish "
-                powershell 'Expand-Archive  -LiteralPath C:/ProgramData/Jenkins/.jenkins/workspace/PipelineManual/sampleapp1.zip -DestinationPath F:/publish'
+                powershell 'Expand-Archive  -LiteralPath C:/ProgramData/Jenkins/.jenkins/workspace/pipeline-git/sampleapp1.zip -DestinationPath F:/publish'
                 }
         }
     }
