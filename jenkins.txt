@@ -44,7 +44,7 @@ pipeline
                 bat "del *.zip"
         
                 bat "tar.exe -a -c -f sampleapp1.zip aspnet-core-dotnet-core/bin/Debug/netcoreapp1.1/publish "
-                powershell 'Expand-Archive  -LiteralPath C:/ProgramData/Jenkins/.jenkins/workspace/PipelineManual/sampleapp1.zip -DestinationPath F:/Publish_Pipeline'
+                powershell 'Expand-Archive  -LiteralPath C:/ProgramData/Jenkins/.jenkins/workspace/PipelineManual/sampleapp1.zip -DestinationPath F:\publish'
                 }
         }
     }
