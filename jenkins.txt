@@ -6,10 +6,10 @@ pipeline
     {
         dotnet =git branch: 'main', url: 'https://github.com/AdityaRai1998/sampleapp-1.git'
     }
-    triggers 
-    {
-        pollSCM 'H * * * *'
-    }
+    //triggers 
+    //{
+       // pollSCM 'H * * * *'
+    //}
     stages
     {
         stage('Checkout') 
@@ -48,4 +48,4 @@ pipeline
                 }
         }
     }
-//}
+}
