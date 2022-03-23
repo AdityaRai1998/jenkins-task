@@ -1,0 +1,51 @@
+pipeline
+{
+    agent any
+    
+    environment 
+    {
+        dotnet =git branch: 'main', url: 'https://github.com/AdityaRai1998/sampleapp-1.git'
+    }
+    triggers 
+    {
+        pollSCM 'H * * * *'
+    }
+    stages
+    {
+        stage('Checkout') 
+        {
+            steps 
+            {
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AdityaRai1998/sampleapp-1.git']]])
+            }
+        }
+    
+        stage('build')
+        {
+            steps
+            {
+                //powershell 'dotnet build C:/ProgramData/jenkins/.jenkins/workspace/Dotnetapp/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj'
+                bat "dotnet build C:/ProgramData/jenkins/.jenkins/workspace/PipelineManual/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj --configuration Release"
+                //C:\ProgramData\Jenkins\.jenkins\workspace\Dotnetapp\aspnet-core-dotnet-core
+            }
+        }
+        stage('publish')
+        {
+            steps
+            {
+                bat "dotnet publish C:/ProgramData/jenkins/.jenkins/workspace/PipelineManual/aspnet-core-dotnet-core/aspnet-core-dotnet-core.csproj"
+            }
+        }
+        stage('Package') 
+        {
+            steps 
+                {
+                echo "Deploying to stage environment for more tests!";
+                bat "del *.zip"
+        
+                bat "tar.exe -a -c -f sampleapp1.zip aspnet-core-dotnet-core/bin/Debug/netcoreapp1.1/publish "
+                powershell 'Expand-Archive  -LiteralPath C:/ProgramData/Jenkins/.jenkins/workspace/PipelineManual/sampleapp1.zip -DestinationPath F:/Publish_Pipeline'
+                }
+        }
+    }
+}
